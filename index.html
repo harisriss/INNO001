@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="" data-theme="light">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>INNO001</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll()
+    </script>
+
+    <style>
+        :root {
+            --tw-prose-code: #111827;
+            --tw-prose-hr: #E5E7EB;
+            --tw-prose-links: #111827;
+            --tw-prose-headings: #111827;
+            --tw-prose-quotes: #111827;
+            --page-bg: #F7F7F8;
+            --page-text: #374151;
+            --conversation-odd-bg: rgba(247, 247, 248);
+            --th-boarders: #4B5563;
+            --td-boarders: #374151;
+        }
+
+        [data-theme="dark"] {
+            --tw-prose-code: #F9FAFB;
+            --tw-prose-hr: #374151;
+            --tw-prose-links: #FFF;
+            --tw-prose-headings: #EAE7E2;
+            --tw-prose-quotes: #F3F4F6;
+            --page-bg: #1A1A1A;
+            --page-text: #EAE7E2;
+            --conversation-odd-bg: rgb(33, 33, 33);
+        }
+
+        * {
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--page-text);
+            background-color: var(--page-bg);
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        [data-theme="light"] .sun {
+            display: none;
+        }
+
+        [data-theme="dark"] .moon {
+            display: none;
+        }
+        .switch-button {
+            display: flex;
+            justify-content: end;
+            padding: 10px;
+        }
+        .toggle {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 5px;
+            background-color: transparent;
+            border: 1px solid #E2E8F0;
+        }
+
+        a {
+            color: var(--tw-prose-links);
+            font-weight: 500;
+            text-decoration-line: underline;
+            text-underline-offset: 2px;
+        }
+
+        .conversation-content > p:first-child,
+        ol:first-child {
+            margin-top: 0;
+        }
+
+        p > code, li > code {
+            color: var(--tw-prose-code);
+            font-weight: 600;
+            font-size: .875em;
+        }
+
+        p > code::before,
+        p > code::after,
+        li > code::before,
+        li > code::after {
+            content: "`";
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--tw-prose-headings);
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 2.25em;
+            font-weight: 600;
+            line-height: 1.1111111;
+            margin-bottom: 0.8888889em;
+            margin-top: 0;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            font-weight: 700;
+            line-height: 1.3333333;
+            margin-bottom: 1em;
+            margin-top: 2em;
+        }
+
+        h3 {
+            font-size: 1.25em;
+            font-weight: 600;
+            line-height: 1.6;
+            margin-bottom: .6em;
+            margin-top: 1.6em;
+        }
+
+        h4 {
+            font-weight: 400;
+            line-height: 1.5;
+            margin-bottom: .5em;
+            margin-top: 1.5em
+        }
+
+        h3, h4 {
+            margin-bottom: .5rem;
+            margin-top: 1rem;
+        }
+
+        h5 {
+            font-weight: 600;
+        }
+
+        blockquote {
+            border-left: 2px solid rgba(142, 142, 160, 1);
+            color: var(--tw-prose-quotes);
+            font-style: italic;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1rem;
+            margin: 1.6em 0;
+            padding-left: 1em;
+            quotes: "\201C" "\201D" "\2018" "\2019";
+        }
+
+        blockquote p:first-of-type:before {
+            content: open-quote;
+        }
+
+        blockquote p:last-of-type:after {
+            content: close-quote;
+        }
+
+        ol, ul {
+            padding-left: 1rem;
+        }
+
+        ::marker {
+            color: #6B7280;
+            font-weight: 400;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 0;
+            table-layout: auto;
+            text-align: left;
+            font-size: .875em;
+            line-height: 1.7142857;
+        }
+
+        table * {
+            box-sizing: border-box;
+            border-width: 0;
+            border-style: solid;
+            border-color: #D9D9E3;
+        }
+
+        table thead {
+            border-bottom-color: var(--th-boarders);
+            border-bottom-width: 1px;
+        }
+
+        table th {
+            background-color: rgba(236, 236, 241, .2);
+            border-bottom-width: 1px;
+            border-left-width: 1px;
+            border-top-width: 1px;
+            padding: 0.25rem 0.75rem;
+        }
+
+        table th:first-child {
+            border-top-left-radius: 0.375rem;
+        }
+
+        table th:last-child {
+            border-right-width: 1px;
+            border-top-right-radius: 0.375rem;
+        }
+
+        table tbody tr {
+            border-bottom-color: var(--td-boarders);
+            border-bottom-width: 1px;
+        }
+
+        table tbody tr:last-child {
+            border-bottom-width: 0;
+        }
+
+        table tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 0.375rem;
+        }
+
+        table tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 0.375rem;
+        }
+
+        table td {
+            border-bottom-width: 1px;
+            border-left-width: 1px;
+            padding: 0.25rem 0.75rem;
+        }
+
+        table td:last-child {
+            border-right-width: 1px;
+        }
+
+        .conversation {
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 1rem;
+        }
+
+        .conversation-header {
+            margin-bottom: 1rem;
+        }
+
+        .conversation-header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .conversation-header .conversation-time {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .conversation-header .conversation-time-label {
+            font-weight: bold;
+        }
+
+        .conversation-header .conversation-time-value {
+            margin-left: 0.5rem;
+        }
+
+        .conversation-header p {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .conversation-item {
+            display: flex;
+            padding: 1rem;
+        }
+
+
+    </style>
+</head>
+
+<body>
+<div class="switch-button">
+    <button class="toggle">
+        <svg
+                class="sun" stroke="white" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"
+        >
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg
+                class="moon" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                stroke-linecap="round"
+                stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"
+        >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+</div>
+
+
+<div class="conversation-item">
+    <div class="conversation-content-wrapper">
+        <div class="conversation-content">
+            <h2>1. Réaliser le compte de résultat prévisionnel sur 3 ans.</h2>
+            <p>Voici le tableau synthétisant les informations données pour chaque année :</p>
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Année 1</th>
+                    <th>Année 2</th>
+                    <th>Année 3</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Ventes de vélos</td>
+                    <td>340 000€</td>
+                    <td>391 000€</td>
+                    <td>430 100€</td>
+                </tr>
+                <tr>
+                    <td>Accessoires et vêtements</td>
+                    <td>50 000€</td>
+                    <td>57 500€</td>
+                    <td>63 250€</td>
+                </tr>
+                <tr>
+                    <td>Locations</td>
+                    <td>36 500€</td>
+                    <td>42 000€</td>
+                    <td>46 200€</td>
+                </tr>
+                <tr>
+                    <td>Total des ventes</td>
+                    <td>426 500€</td>
+                    <td>490 500€</td>
+                    <td>539 550€</td>
+                </tr>
+                <tr>
+                    <td>Coût des ventes</td>
+                    <td>349 000€</td>
+                    <td>401 350€</td>
+                    <td>441 485€</td>
+                </tr>
+                <tr>
+                    <td>Marge brute</td>
+                    <td>77 500€</td>
+                    <td>89 150€</td>
+                    <td>98 065€</td>
+                </tr>
+                <tr>
+                    <td>Charges d'exploitation</td>
+                    <td>23 925€</td>
+                    <td>26 910€</td>
+                    <td>29 435€</td>
+                </tr>
+                <tr>
+                    <td>Résultat d'exploitation</td>
+                    <td>53 575€</td>
+                    <td>62 240€</td>
+                    <td>68 630€</td>
+                </tr>
+                <tr>
+                    <td>Autres charges et charges externes</td>
+                    <td>18 400€</td>
+                    <td>19 860€</td>
+                    <td>20 570€</td>
+                </tr>
+                <tr>
+                    <td>Salaires et charges sociales</td>
+                    <td>51 840€</td>
+                    <td>57 024€</td>
+                    <td>62 727€</td>
+                </tr>
+                <tr>
+                    <td>Résultat avant impôts</td>
+                    <td>14 335€</td>
+                    <td>29 356€</td>
+                    <td>34 333€</td>
+                </tr>
+                <tr>
+                    <td>Impôt sur les sociétés</td>
+                    <td>4 015€</td>
+                    <td>8 221€</td>
+                    <td>9 605€</td>
+                </tr>
+                <tr>
+                    <td>Résultat net</td>
+                    <td>10 320€</td>
+                    <td>21 135€</td>
+                    <td>24 728€</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>Remarques :</p>
+            <ul>
+                <li>Le coût des réparations est de 17 500€ HT en année 1, 19 250€ HT en année 2 et 21 175€ HT en
+                    année 3.
+                </li>
+                <li>Les achats de marchandises sont de 238 000€ en année 1, 273 700€ en année 2 et 301 070€ en année
+                    3.
+                </li>
+                <li>Les charges externes évoluent selon les taux indiqués.</li>
+                <li>Les salaires et charges sociales augmentent selon les taux indiqués.</li>
+                <li>L'impôt sur les sociétés est calculé à un taux de 28%.</li>
+            </ul>
+            <p>Les hypothèses sous-jacentes à ces projections sont les suivantes :</p>
+            <ul>
+                <li>Les ventes de vélos augmentent de façon régulière, en ligne avec la croissance du marché
+                    global.
+                </li>
+                <li>Les ventes d'accessoires et de vêtements augmentent à un rythme plus élevé que les ventes
+                    de vélos, en raison de la croissance du nombre de clients fidèles et de la diversification de
+                    l'offre.
+                </li>
+                <li>Les locations augmentent également à un rythme plus élevé que les ventes de vélos, en raison de
+                    la croissance du nombre de clients souhaitant tester les produits avant de les acheter.
+                </li>
+                <li>Les charges d'exploitation augmentent légèrement en proportion du chiffre d'affaires,
+                    en raison des coûts de marketing et de publicité nécessaires pour maintenir la croissance de
+                    l'entreprise.
+                </li>
+                <li>Les coûts des réparations et les achats de marchandises augment</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="conversation-item">
+    <div class="conversation-content-wrapper">
+        <div class="conversation-content">
+            <p>Le tableau suivant récapitule les dépenses de l'entreprise pour son démarrage :</p>
+            <table>
+                <thead>
+                <tr>
+                    <th>Poste de dépenses</th>
+                    <th>Montant HT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Droit au bail</td>
+                    <td>17 000 €</td>
+                </tr>
+                <tr>
+                    <td>Aménagement des locaux</td>
+                    <td>35 000 €</td>
+                </tr>
+                <tr>
+                    <td>Outillage</td>
+                    <td>12 500 €</td>
+                </tr>
+                <tr>
+                    <td>Matériel informatique</td>
+                    <td>3 000 €</td>
+                </tr>
+                <tr>
+                    <td>Véhicule</td>
+                    <td>18 000 €</td>
+                </tr>
+                <tr>
+                    <td>Scooters pour la location</td>
+                    <td>10 500 €</td>
+                </tr>
+                <tr>
+                    <td>Dépôt de garantie de 2 mois de loyer</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Petit outillage</td>
+                    <td>800 €</td>
+                </tr>
+                <tr>
+                    <td>Frais de dossier et de garantie</td>
+                    <td>1 200 €</td>
+                </tr>
+                <tr>
+                    <td>Publicité</td>
+                    <td>5 000 €</td>
+                </tr>
+                <tr>
+                    <td>Constitution de la société et inscription</td>
+                    <td>3 000 €</td>
+                </tr>
+                <tr>
+                    <td>Trésorerie d'avance</td>
+                    <td>10 000 €</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>116 000 €</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>Note : le dépôt de garantie de 2 mois de loyer n'est pas mentionné car son montant
+               dépend du
+               loyer et n'est pas précisé dans l'énoncé.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="conversation-item">
+
+    <div class="conversation-content-wrapper">
+        <div class="conversation-content">
+            <p>En utilisant les données fournies, voici les calculs pour estimer le Besoin en Fonds de
+               Roulement (BFR) :
+            </p>
+            <ul>
+                <li>Stock : Le stock représente 3 mois d'achat de marchandises HT, soit 3/12 * (500,000 +
+                    10,500) = 131,250 € HT
+                </li>
+                <li>Fournisseurs marchandises : Les fournisseurs de marchandises sont payés à 30 jours, ce qui
+                    correspond à un montant de 1/12 * (500,000 + 10,500) = 42,542 € TTC
+                </li>
+                <li>Autres fournisseurs : Comptant, donc pas de délai de règlement à prendre en compte.</li>
+                <li>Clients : Comptant, donc pas de délai de règlement à prendre en compte.</li>
+            </ul>
+            <p>En sommant ces différentes composantes, le BFR estimé est de :</p>
+            <p>BFR = Stock + Fournisseurs marchandises - Autres fournisseurs - Clients
+               = 131,250 + 42,542 - 0 - 0
+               = 173,792 €
+            </p>
+            <p>Ce BFR doit être financé, par exemple, par une ligne de crédit court terme ou un découvert
+               bancaire.
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<div class="conversation-item">
+    <div class="conversation-content-wrapper">
+        <div class="conversation-content">
+            <p>Voici le compte de résultat prévisionnel sur 3 ans pour l'entreprise de vente, location, et
+               réparation de cycles et de scooters :
+            </p>
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Année 1 (HT)</th>
+                    <th>Année 2 (HT)</th>
+                    <th>Année 3 (HT)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Ventes</td>
+                    <td>394 000 €</td>
+                    <td>464 100 €</td>
+                    <td>510 510 €</td>
+                </tr>
+                <tr>
+                    <td>Locations</td>
+                    <td>36 500 €</td>
+                    <td>42 225 €</td>
+                    <td>46 447,50 €</td>
+                </tr>
+                <tr>
+                    <td>Réparations</td>
+                    <td>17 500 €</td>
+                    <td>19 250 €</td>
+                    <td>21 175 €</td>
+                </tr>
+                <tr>
+                    <td>Achats</td>
+                    <td>237 000 €</td>
+                    <td>277 950 €</td>
+                    <td>305 745 €</td>
+                </tr>
+                <tr>
+                    <td>Charges externes</td>
+                    <td>17 675 €</td>
+                    <td>18 328,75 €</td>
+                    <td>18 511,40 €</td>
+                </tr>
+                <tr>
+                    <td>Charges de personnel</td>
+                    <td>61 275 €</td>
+                    <td>67 402,50 €</td>
+                    <td>74 142,75 €</td>
+                </tr>
+                <tr>
+                    <td>Dotations aux amortissements</td>
+                    <td>12 036 €</td>
+                    <td>19 436 €</td>
+                    <td>19 436 €</td>
+                </tr>
+                <tr>
+                    <td>Charges financières</td>
+                    <td>4 151,25 €</td>
+                    <td>4 151,25 €</td>
+                    <td>4 151,25 €</td>
+                </tr>
+                <tr>
+                    <td>Impôts et taxes</td>
+                    <td>3 100 €</td>
+                    <td>3 193 €</td>
+                    <td>3 254,86 €</td>
+                </tr>
+                <tr>
+                    <td>Bénéfice (avant IS)</td>
+                    <td>31 762,75 €</td>
+                    <td>37 664,00 €</td>
+                    <td>41 746,24 €</td>
+                </tr>
+                <tr>
+                    <td>IS</td>
+                    <td>7 940,69 €</td>
+                    <td>9 416,00 €</td>
+                    <td>10 436,56 €</td>
+                </tr>
+                <tr>
+                    <td>Bénéfice net</td>
+                    <td>23 822,06 €</td>
+                    <td>28 248,00 €</td>
+                    <td>31 309,68 €</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>Notes :</p>
+            <ul>
+                <li>Les ventes de vélos incluent la marge brute de 30% (68 400 € en année 1, 80 805 € en année 2, 88
+                    891,50 € en année 3).
+                </li>
+                <li>Les ventes d'accessoires et de vêtements incluent un coefficient multiplicateur de 1,45 (72
+                    500 € en année 1, 83 375 € en année 2, 91 712,50 € en année 3).
+                </li>
+                <li>Les achats de pièces pour les réparations incluent une marge de 10% à la revente.</li>
+                <li>Les charges externes incluent les charges de sous-traitance, fournitures de bureau, assurances,
+                    publicité, documentation, déplacements, poste et télécommunications, maintenance, énergie, et
+                    loyer.
+                </li>
+                <li>Les charges de personnel incluent les salaires et charges sociales pour un associé à temps plein
+                    et un employé à mi-temps pour la vente.
+                </li>
+                <li>Les dotations aux amortissements sont calculées en utilisant la méthode linéaire sur la durée de
+                    vie des immobilisations.
+                </li>
+                <li>Les charges financières incluent les intérêts sur l'emprunt bancaire et sur le crédit
+                    TVA.
+                </li>
+                <li>Les bénéfices avant IS sont soumis à l'impôt sur les sociétés à un taux de 25%.</li>
+                <li>Les dividendes des actionnaires ne sont pas inclus dans le compte de résultat, car ils sont
+                    prélevés sur la trésorerie disponible en fin d'année.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="conversation-item">
+
+    <div class="conversation-content-wrapper">
+        <h2>2. Déterminez le seuil de rentabilité.</h2>
+
+        <div class="conversation-content">
+            <p>Le seuil de rentabilité est le niveau d'activité à partir duquel l'entreprise commence à
+               générer un bénéfice net. Pour le calculer, il faut déterminer la marge sur coûts variables et la
+               diviser par le taux de marge brute.
+            </p>
+            <ol>
+                <li>Calcul de la marge sur coûts variables :</li>
+            </ol>
+            <ul>
+                <li>Ventes de vélos : 400 x 850€ x 0,30 = 102 000€</li>
+                <li>Ventes d'accessoires et vêtements : 50 000€ x 0,45 = 22 500€</li>
+                <li>Locations : 36 500€</li>
+                <li>Réparations : 500 x 35€ = 17 500€</li>
+            </ul>
+            <p>Total des coûts variables : 178 500€</p>
+            <ol start="2">
+                <li>Calcul du taux de marge brute :</li>
+            </ol>
+            <ul>
+                <li>Ventes de vélos : 400 x 850€ = 340 000€</li>
+                <li>Ventes d'accessoires et vêtements : 50 000€ x 1,45 = 72 500€</li>
+            </ul>
+            <p>Total des ventes : 412 500€</p>
+            <p>Taux de marge brute = (178 500 / 412 500) x 100 = 43,26%</p>
+            <ol start="3">
+                <li>Calcul du seuil de rentabilité :</li>
+            </ol>
+            <p>Seuil de rentabilité = (charges fixes + intérêts d'emprunt) / taux de marge sur coûts
+               variables
+            </p>
+            <ul>
+                <li>Charges fixes annuelles : 46 130€</li>
+                <li>Intérêts d'emprunt annuels : (56 500€ x 0,045) / 3 = 845€</li>
+            </ul>
+            <p>Seuil de rentabilité = (46 130 + 845) / 0,4326 = 115 635€</p>
+            <p>Le seuil de rentabilité de l'entreprise est de 115 635€. Cela signifie que l'entreprise
+               doit générer un chiffre d'affaires annuel d'au moins 115 635€ pour couvrir l'ensemble
+               de ses charges et rembourser ses emprunts sans faire de bénéfice ni subir de perte.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="conversation-item">
+    <div class="conversation-content-wrapper">
+        <h2>3. Calculez la CAF.</h2>
+        <div class="conversation-content">
+            <p>La CAF (Capacité d'Autofinancement) représente la trésorerie générée par l'activité de l'entreprise,
+               elle permet de mesurer la capacité de l'entreprise à financer ses investissements, rembourser
+               ses emprunts et distribuer des dividendes.
+            </p>
+            <p>La formule de la CAF est la suivante :</p>
+            <p>CAF = Résultat net + dotations aux amortissements et aux provisions - produits de cession
+               d'immobilisations
+               + charges de décaissement - produits d'encaissement
+            </p>
+            <p>En utilisant les données du compte de résultat prévisionnel, on peut calculer la CAF de chaque année
+               :
+            </p>
+            <ul>
+                <li>CAF année 1 = 69 258 € + 21 157 € - 0 € - 18 610 € - 0 € = 71 805 €</li>
+                <li>CAF année 2 = 86 468 € + 26 671 € - 0 € - 23 479 € - 0 € = 89 660 €</li>
+                <li>CAF année 3 = 103 458 € + 33 672 € - 0 € - 28 624 € - 0 € = 108 506 €</li>
+            </ul>
+            <p>Donc la CAF de l'entreprise pour l'ensemble des 3 années est de 269 971 €.</p>
+        </div>
+    </div>
+</div>
+
+<div class="conversation-item">
+
+    <div class="conversation-content-wrapper">
+        <h2>4. Déterminez le BFR.</h2>
+        <div class="conversation-content">
+            <p>Le BFR (Besoin en Fonds de Roulement) représente la différence entre les ressources financières
+               nécessaires pour financer le cycle d'exploitation de l'entreprise (stocks + créances
+               clients - dettes fournisseurs).
+            </p>
+            <p>Pour calculer le BFR, il faut d'abord déterminer le niveau des stocks, des créances clients et
+               des dettes fournisseurs.
+            </p>
+            <p>Niveau des stocks :</p>
+            <ul>
+                <li>Ventes de vélos : 400 vélos à 850 € HT = 340 000 € HT</li>
+                <li>Taux de marge brute : 30%, donc coût d'achat = 70% x 340 000 € = 238 000 € HT</li>
+                <li>Délai de stockage : 3 mois</li>
+                <li>Niveau des stocks = 238 000 € x (3/12) = 59 500 €</li>
+            </ul>
+            <p>Niveau des créances clients :</p>
+            <ul>
+                <li>Ventes de vélos : 400 vélos à 850 € HT = 340 000 € HT</li>
+                <li>Accessoires et vêtements : 50 000 € HT</li>
+                <li>Locations : 36 500 € HT</li>
+                <li>Total créances clients = 426 500 € HT</li>
+            </ul>
+            <p>Niveau des dettes fournisseurs :</p>
+            <ul>
+                <li>Achats de marchandises : 238 000 € HT</li>
+                <li>Sous-traitance : 5 000 € HT</li>
+                <li>Fourniture de bureau : 1 500 € HT</li>
+                <li>Assurances : 2 500 € HT</li>
+                <li>Publicité : 3 000 € HT</li>
+                <li>Documentation : 75 € HT</li>
+                <li>Déplacements : 1 750 € HT</li>
+                <li>Poste et télécommunications : 2 750 € HT</li>
+                <li>Maintenance : 1 800 € HT</li>
+                <li>Energie : 3 000 € HT</li>
+                <li>Loyer : 2 800 € x 12 mois = 33 600 € HT</li>
+                <li>Total dettes fournisseurs = 59 825 € HT</li>
+            </ul>
+            <p>BFR = stocks + créances clients - dettes fournisseurs
+               BFR = 59 500 € + 426 500 € - 59 825 € = 426 175 €
+            </p>
+            <p>Le BFR prévisionnel pour l'entreprise est de 426 175 €.</p>
+        </div>
+    </div>
+</div>
+<div class="conversation-item">
+
+
+    <div class="conversation-content-wrapper">
+        <h2>5. Présentez le plan de financement de démarrage.</h2>
+        <div class="conversation-content">
+            <p>Le plan de financement de démarrage permet de déterminer les besoins financiers de l'entreprise
+               pour son lancement. Il est constitué des ressources dont elle dispose ainsi que des dépenses
+               nécessaires pour son démarrage.
+            </p>
+            <p>Ressources :</p>
+            <ul>
+                <li>Capital social : 50 000 €</li>
+                <li>Prêt à taux 0% : 20 000 €</li>
+                <li>Emprunt bancaire : 205 473,86 € (calculé précédemment)</li>
+                <li>Apport en compte courant d'associé : 10 000 €</li>
+            </ul>
+            <p>Total des ressources : 285 473,86 €</p>
+            <p>Dépenses :</p>
+            <ul>
+                <li>Droit au bail : 17 000 €</li>
+                <li>Aménagement des locaux : 35 000 €</li>
+                <li>Outillage : 12 500 €</li>
+                <li>Matériel informatique : 3 000 €</li>
+                <li>Véhicule : 18 000 €</li>
+                <li>Scooters pour la location : 10 500 €</li>
+                <li>Dépôt de garantie : 5 600 € (2 mois de loyer)</li>
+                <li>Petit outillage : 800 €</li>
+                <li>Frais de dossier et de garantie : 1 200 €</li>
+                <li>Publicité : 5 000 €</li>
+                <li>Constitution de la société et inscription au RCS : 3 000 €</li>
+            </ul>
+            <p>Total des dépenses : 112 600 €</p>
+            <p>Besoin de financement :
+               285 473,86 € (ressources) - 112 600 € (dépenses) = 172 873,86 €
+            </p>
+            <p>Le besoin de financement pour le démarrage de l'entreprise est donc de 172 873,86 €.</p>
+        </div>
+    </div>
+</div>
+
+<div class="conversation-item">
+    <div class="conversation-content-wrapper">
+        <h2>6. Présentez le tableau de financement.</h2>
+        <div class="conversation-content">
+            <p>Le tableau de financement permet de voir l'ensemble des flux de trésorerie de l'entreprise
+               sur une période donnée. Voici le tableau de financement pour les 3 premières années de l'entreprise
+               :
+            </p>
+            <table>
+                <thead>
+                <tr>
+                    <th>Flux de trésorerie</th>
+                    <th>Année 1</th>
+                    <th>Année 2</th>
+                    <th>Année 3</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Capacité d'autofinancement (CAF)</td>
+                    <td>34 291 €</td>
+                    <td>72 678 €</td>
+                    <td>87 065 €</td>
+                </tr>
+                <tr>
+                    <td>Variation du BFR</td>
+                    <td>-14 000 €</td>
+                    <td>6 000 €</td>
+                    <td>3 556 €</td>
+                </tr>
+                <tr>
+                    <td>Investissements</td>
+                    <td>-92 800 €</td>
+                    <td>-20 000 €</td>
+                    <td>0 €</td>
+                </tr>
+                <tr>
+                    <td>Remboursement d'emprunts</td>
+                    <td>-8 238 €</td>
+                    <td>-10 007 €</td>
+                    <td>-10 007 €</td>
+                </tr>
+                <tr>
+                    <td>Dividendes</td>
+                    <td>0 €</td>
+                    <td>-40 000 €</td>
+                    <td>-40 000 €</td>
+                </tr>
+                <tr>
+                    <td>Variation de trésorerie</td>
+                    <td>9 253 €</td>
+                    <td>8 671 €</td>
+                    <td>40 614 €</td>
+                </tr>
+                <tr>
+                    <td>Trésorerie initiale</td>
+                    <td>10 000 €</td>
+                    <td>19 253 €</td>
+                    <td>27 924 €</td>
+                </tr>
+                <tr>
+                    <td>Trésorerie finale</td>
+                    <td>19 253 €</td>
+                    <td>27 924 €</td>
+                    <td>68 538 €</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>Explication des flux de trésorerie :</p>
+            <ul>
+                <li>La capacité d'autofinancement (CAF) représente les flux de trésorerie générés par l'activité
+                    de l'entreprise, après déduction des charges d'exploitation, des dotations aux
+                    amortissements et des provisions. On remarque que la CAF augmente chaque année grâce à
+                    l'augmentation
+                    du chiffre d'affaires.
+                </li>
+                <li>La variation du BFR représente l'impact du besoin en fonds de roulement sur la trésorerie
+                    de l'entreprise. En année 1, le BFR est négatif car l'entreprise a dû payer un dépôt
+                    de garantie et des frais de dossier, qui seront récupérés plus tard. En année 2, la variation
+                    est positive car l'entreprise a investi dans de l'outillage supplémentaire. En année
+                    3, le BFR augmente légèrement car l'entreprise a augmenté ses stocks.
+                </li>
+                <li>Les investissements représentent les flux de trésorerie nécessaires pour acquérir des
+                    immobilisations (outillage, véhicules, etc.). En année 1, les investissements sont importants
+                    car l'entreprise doit tout acheter pour démarrer. En année 2, les investissements sont
+                    moins importants car l'entreprise a déjà acquis une partie des immobilisations nécessaires.
+                    En année 3, il n'y a pas d'investissements prévus car l'entreprise a tout acheté.
+                </li>
+                <li>Le remboursement d'emprunts représente les flux de trésorerie nécessaires pour rembourser
+                    les emprunts bancaires. Le montant du remboursement dépend du montant emprunté, du taux d'intérêt
+                    et de la durée de remboursement. On remarque que le montant du remboursement diminue chaque
+                    année car le montant emprunté diminue également.
+                </li>
+                <li>Les dividendes représentent les flux de trésorerie distribués aux actionnaires de l'entreprise.
+                    Les dividendes ne sont distribués que si l'entreprise dégage suffisamment de bénéfices et
+                    si sa trésorerie le permet. On remarque que les dividendes ne sont distribu
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function toggleDarkMode(mode) {
+        const html = document.querySelector("html")
+        const isDarkMode = html.getAttribute("data-theme") === "dark"
+        const newMode = mode || (isDarkMode ? "light" : "dark")
+        if (newMode !== "dark" && newMode !== "light") return
+        html.setAttribute("data-theme", newMode)
+    }
+
+    // Support for ?theme=dark
+    const urlParams = new URLSearchParams(window.location.search)
+    const theme = urlParams.get("theme")
+    if (theme) toggleDarkMode(theme)
+
+    document.querySelector(".toggle").addEventListener("click", () => toggleDarkMode())
+</script>
+</body>
+
+</html>
